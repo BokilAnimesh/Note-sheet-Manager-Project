@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Notsheet Manager</title>
+        <link rel="stylesheet" href="/user/history.css">
+        <script src="https://kit.fontawesome.com/d95664049a.js"></script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+			<div class="toggler">
+                <button class="menu-btn"><i id="icon" class="fa-solid fa-bars"></i></button>
+            </div>
+            <div class="sidebar"><img src="https://portal.medicaps.ac.in/AccSoft2/Parent_Script/img/medi1.jpg" alt="Medi-Caps University">
+                <ul >
+                    <% if(Faculty.DESIGNATION == "HOD"|| Faculty.DESIGNATION == "DEAN" || Faculty.DESIGNATION == "Assistant Professor"|| Faculty.DESIGNATION == "Associate Professor" || Faculty.DESIGNATION == "Professor" || Faculty.DESIGNATION == "Lecturer" || Faculty.DESIGNATION == "Lab Assistant" || Faculty.DESIGNATION == "Lab Technician") { %>
+                        <li><a href="/users/dashboard" target="_self">DASHBOARD</a></li>
+                        <div class="sidebar-border"></div>
+                        <li><a href="/users/createnotesheet" target="_self">CREATE NOTESHEET</a></li>
+                        <div class="sidebar-border"></div>
+                        <li><a href="/users/viewns" target="_self">VIEW NOTESHEET</a></li>
+                        <div class="sidebar-border"></div>
+                        <% } %>
+                    
+                    <% if(Faculty.DESIGNATION == "HOD"|| Faculty.DESIGNATION == "DEAN") { %>
+                        <li><a href="/users/approvens" target="_self">PENDING NOTESHEETS</a></li>
+                        <div class="sidebar-border"></div>
+                            <li><a href="/users/approvedns" target="_self">APPROVED NOTESHEETS</a></li>
+                    <% } %>
+    
+                    <% if(Faculty.DESIGNATION == "Pro VC"|| Faculty.DESIGNATION == "VC" || Faculty.DESIGNATION == "OSD") { %>
+                            <li><a href="/users/dashboard" target="_self">DASHBOARD</a></li>
+                            <div class="sidebar-border"></div>
+                            <li><a href="/users/approvens" target="_self">PENDING NOTESHEETS</a></li>
+                            <div class="sidebar-border"></div>
+                            <li><a href="/users/approvedns" target="_self">APPROVED NOTESHEETS</a></li>
+                            
+                    <% } %>
+                </ul>
+            </div>
+            <div class="main_content">
+                <div class="header"><img src="https://www.medicaps.ac.in/resources/img/logo-navbar.png" alt="Medi-Caps University">
+                    <ul class="nav-ul">
+                        <div class="nav-list">
+                            <li>STAFF NAME</li><span><%= Faculty.EMPNAME %></span>
+                        </div>
+                        <div class="border"></div>
+                        <div class="nav-list">
+                            <li >STAFF ID </li><span><%= Faculty.EMPID %></span>
+                        </div>
+                        <div class="border"></div>
+                        <div class="nav-list">
+                            <li>DEPARTMENT</li><span><%= Faculty.DEPTNAME %></span>
+                        </div>
+                    </ul>
+
+                        <div class="profile profile-dropdown ">
+                        <img src="/profile.svg" alt="profile">
+
+
+
+                        <ul class="nav-menu">
+                            <div class="tail"></div>
+                            <a href="/users/viewprofile" target="_self" ><li>View Profile</li></a>
+                            <a href="/users/changepassword" target="_self"><li>Change Password</li></a>
+                            <a href="/users/logout" target="_self"><li>Log out</li></a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+			<div class="view_form create_user">
+            
+					<h2>APPROVED NOTESHEET</h2>
+					<div class="box" >
+                        <div class="table-container">
+
+
+						<table>
+							<thead>
+							<tr>
+							<th>NOTE ID</th>
+							<th>DATE OF APPROVAL</th>
+							<th>VIEW NOTESHEET</th>
+                            <th>STATUS</th>
+                            </tr>
+						</thead>
+						<tbody>
+                            <% for(let i=0;i<Notestatus.length ; i++) {%>
+                                <tr>
+                                    <td><%= Notestatus[i].NOTEID%></td>
+                                    <td><%= Notestatus[i].DATE.toDateString()%></td>
+                                    <div class="view">
+                                        <% let noteid = Notestatus[i].NOTEID %>
+                                        <td><a href="/users/ppppp?noteid=<%=noteid%>">View Notesheet</a></td>
+                                    </div>
+                                    <% let status = Notestatus[i].STATUS %>
+                                    <% if(status == 0 || status == 1 ||status == 2 ||status == 3 ||status == 4){ %>
+                                        <td>Pending</td>
+                                    <% } %>
+                                    <% if(status == 5){ %>
+                                        <td>Approved</td>
+                                    <% } %>
+                                </tr>
+                            <% } %>
+                                    
+
+						</tbody>
+					</table>
+                </div>
+					<div class="login">
+						<button formaction="/users/dashboard"><a href="/users/dashboard" target="_self">Exit</a></button>
+						</div>
+
+					</div>
+
+					</div>
+
+
+			</div>
+        </div>
+
+
+    </body>
+	<script>
+
+
+document.addEventListener('DOMContentLoaded', () => {
+const profileDropdown = document.querySelector(".profile-dropdown");
+const approve = document.querySelector('.select');
+const menu = document.querySelector('.menu-btn');
+		const sidebar = document.querySelector(".sidebar");
+		const icon = document.getElementById('icon');
+
+        const profileMenu = profileDropdown.querySelector('.nav-menu');
+
+        profileDropdown.addEventListener('click', () => {
+            profileMenu.classList.toggle('menu-open');
+
+        });
+		document.addEventListener('click', (event) => {
+    const clickedOutsideMenu = !profileDropdown.contains(event.target) && !profileMenu.contains(event.target);
+    if (clickedOutsideMenu) {
+        profileMenu.classList.remove('menu-open');
+    }
+});
+
+approve.addEventListener('change', () => {
+        if (approve.value === 'approve') {
+            approve.classList.toggle('green');
+        } else {
+            approve.classList.remove('green');
+        }
+		if(approve.value === 'deny'){
+			approve.classList.toggle('red');
+		}
+		else {
+            approve.classList.remove('red');
+        }
+    });
+
+
+
+menu.addEventListener('click',()=>{
+	sidebar.classList.toggle('block');
+
+})
+
+icon.addEventListener('click',()=>{
+
+
+	if(icon.classList.contains('fa-xmark')){
+		icon.classList.remove('fa-xmark');
+	icon.classList.add('fa-bars');
+	icon.classList.toggle('rotate');
+}else{
+
+	icon.classList.toggle('rotate');
+		icon.classList.remove('fa-bars');
+		icon.classList.add('fa-xmark');
+
+	}
+
+
+})
+});
+	</script>
+
+    </html>

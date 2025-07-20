@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIEW NOTESHEET</title>
+    <link rel="stylesheet" href="/admin/viewnotesheet.css"> 
+</head>
+<body>
+    <div class="wrapper">
+    <div class="img"><img src="https://www.medicaps.ac.in/resources/img/logo-navbar.png" alt="Medi-Caps logo"></div>
+    <div class="fields">
+        <h3>Details</h3>
+    <div class="sid">Staff ID: <%=Notesheet[0].EMPID%><p></p>
+    </div>
+    <div class="sname">Staff Name: <%=Faculty[0].EMPNAME%><p></p>
+    </div>
+    <div class="dept">Department : <%=Faculty[0].DEPTNAME%><p></p></div>
+    <div class="fac">Faculty : <%= Faculty[0].FNAME %><p></p></div>
+    <div class="des">Designation : <%=Faculty[0].DESIGNATION%><p></p></div>
+    <div class="date">Date : <%=Notesheet[0].DATEANDTIME%><p></p></div>
+    <div class="sub">Subject : <%= Notesheet[0].SUBJECT %><p></p></div>
+    <div class="descr">Description :<%= Notesheet[0].DETAILS %></div>
+    <p>
+        <br>
+        <br>
+        <br>
+    </p>
+</div>
+
+    <div class="check">
+    <form action="">
+    <ul >
+        <h3>Approved By</h3>
+        <div class="checker">
+            <%let status = Notesheet[0].STATUS%>
+            <%if(status == 0){%>
+                <li>HOD <b>::</b> Not Approved</li>
+                <li>Dean <b>::</b> Not Approved</li>
+                <li>Pro VC <b>::</b> Not Approved</li>
+                <li>VC <b>::</b> Not Approved</li>
+                <li>OSD <b>::</b> Not Approved</li>
+            <% } %>
+            <%if(status == 1){%>
+                <li>HOD <b>::</b> Approved</li>
+                <li>Dean <b>::</b> Not Approved</li>
+                <li>Pro VC <b>::</b> Not Approved</li>
+                <li>VC <b>::</b> Not Approved</li>
+                <li>OSD <b>::</b> Not Approved</li>
+            <% } %>
+            <%if(status == 2){%>
+                <li>HOD <b>::</b> Approved</li>
+                <li>Dean <b>::</b> Approved</li>
+                <li>Pro VC <b>::</b> Not Approved</li>
+                <li>VC <b>::</b> Not Approved</li>
+                <li>OSD <b>::</b> Not Approved</li>
+            <% } %>
+            <%if(status == 3){%>
+                <li>HOD <b>::</b> Approved</li>
+                <li>Dean <b>::</b> Approved</li>
+                <li>Pro VC <b>::</b> Approved</li>
+                <li>VC <b>::</b> Not Approved</li>
+                <li>OSD <b>::</b> Not Approved</li>
+            <% } %>
+            <%if(status == 4){%>
+                <li>HOD <b>::</b> Approved</li>
+                <li>Dean <b>::</b> Approved</li>
+                <li>Pro VC <b>::</b> Approved</li>
+                <li>VC <b>::</b>  Approved</li>
+                <li>OSD <b>::</b> Not Approved</li>
+            <% } %>
+            <%if(status == 5){%>
+                <li>HOD :<b>::</b> Approved</li>
+                <li>Dean <b>::</b> Approved</li>
+                <li>Pro VC <b>::</b> Approved</li>
+                <li>VC <b>::</b> Approved</li>
+                <li>OSD <b>::</b> Approved</li>
+            <% } %>
+            <%if(status == 11){%>
+                <li>HOD <b>::</b> Declined</li>
+            <% } %>
+            <%if(status == 12){%>
+                <li>HOD <b>::</b> Approved</li>
+                <li>Dean <b>::</b> Declined</li>
+            <% } %>
+            <%if(status == 13){%>
+                <li>HOD <b>::</b> Approved</li>
+                <li>Dean <b>::</b> Approved</li>
+                <li>Pro VC <b>::</b> Declined</li>
+            <% } %>
+            <%if(status == 14){ %>
+                <li>HOD <b>::</b> Approved</li>
+                <li>Dean <b>::</b> Approved</li>
+                <li>Pro VC <b>::</b> Approved</li>
+                <li>VC <b>::</b> Declined</li>
+            <% } %>
+            <%if(status == 15){ %>
+                <li>HOD <b>::</b> Approved</li>
+                <li>Dean <b>::</b> Approved</li>
+                <li>Pro VC <b>::</b> Approved</li>
+                <li>VC <b>::</b> Approved</li>
+                <li>OSD <b>::</b> Declined</li>
+            <% } %>
+    </div>
+    </ul>
+</form>
+</div>
+</div>
+</body>
+</html>

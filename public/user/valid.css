@@ -1,0 +1,21 @@
+.fail {
+        color: red;
+        width: 74%;
+        font-weight: 600;
+    }
+    .msg{
+        color: green;
+    background-color: #87fa874a;
+    font-size: 1.5rem;
+    font-weight: 600;
+width: 68%;
+    }
+
+.success{
+    height: 2rem;
+    padding: 0.3rem 0.5rem;
+    width: 100%;
+    font-weight: 600;
+    font-size: medium;
+    background-color: #5cff5ce9;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+     <link rel="stylesheet" href="user/login.css">
+     <link rel="stylesheet" href="user/valid.css">
+     
+    
+</head>
+<body>
+<div class="wrapper">
+    <div class="box">
+       
+        <div class="logo">
+            <img src="https://www.medicaps.ac.in/resources/img/logo-navbar.png">
+        </div>
+        <div class="form">
+            <form id="form" method="post" action="/users/login" >
+        <div class="heading">
+            <h1>LOGIN</h1>
+        </div>
+        <div class="username">
+            <input type="text" id="username" name="username" placeholder="Username">
+        </div>
+        
+        <% if(failure && failure.length){ %>
+            <div class="fail">
+
+                *<%= failure %>
+            </div>
+        <% } %>
+        <div class="Password">
+            <input type="password" id="password" name="password" placeholder="Password">
+        </div>
+        <% if(passwordNotMatch && passwordNotMatch.length){ %>
+            <div class="fail">
+            *<%= passwordNotMatch %>
+            </div>
+        <% } %>
+        <div class="admin">
+            <p>Are you <a href="/admin/adminlogin" target="_self">admin?</a>
+            </p>
+        </div>
+        <div class="login">
+            <button >Login</button>
+        </div>
+    </div>
+    
+        
+    </div>
+        </div>
+    </form>
+    </div>
+</div>
+</div>
+</div>
+    <footer>
+        <div class="foot">
+            <div class="foot_content">
+            <p>@ right reserved by <a href="#" >Student Developer Community Club</a>   
+            </p>
+        </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        
+        const username = document.getElementById('username');
+        const password = document.getElementById('password');
+        const form = document.getElementById('form');
+    
+        form.addEventListener('submit', function(e) {
+           // e.preventDefault();
+    
+            if (username.value.trim() === '') {
+                showError('Username is required.');
+                return;
+            }
+            if (password.value.trim() === '') {
+                showError('Password is required.');
+                return;
+            }
+    
+            //submitForm();
+        });
+    
+        // function submitForm() {
+        //     swal(
+        //         'Logged in',
+        //         'You logged in successfully!',
+        //         'success'
+        //     ).then(function() {
+        //         form.submit(); // Submit the form
+        //     });
+        // }
+    
+        function showError(message) {
+            swal('Error', message, 'error');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+    <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notsheet Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/user/viewprofile.css">
+    <script src="https://kit.fontawesome.com/d95664049a.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+        <div class="sidebar"><img src="https://portal.medicaps.ac.in/AccSoft2/Parent_Script/img/medi1.jpg" alt="Medi-Caps University">
+            <ul >
+                <% if(Faculty.DESIGNATION == "HOD"|| Faculty.DESIGNATION == "DEAN" || Faculty.DESIGNATION == "Assistant Professor"|| Faculty.DESIGNATION == "Associate Professor" || Faculty.DESIGNATION == "Professor" || Faculty.DESIGNATION == "Lecturer" || Faculty.DESIGNATION == "Lab Assistant" || Faculty.DESIGNATION == "Lab Technician") { %>
+                    <li><a href="/users/dashboard" target="_self">DASHBOARD</a></li>
+                    <div class="sidebar-border"></div>
+                    <li><a href="/users/createnotesheet" target="_self">CREATE NOTESHEET</a></li>
+                    <div class="sidebar-border"></div>
+                    <li><a href="/users/viewns" target="_self">VIEW NOTESHEET</a></li>
+                    <div class="sidebar-border"></div>
+                    <% } %>
+                
+                <% if(Faculty.DESIGNATION == "HOD"|| Faculty.DESIGNATION == "DEAN") { %>
+                    <li><a href="/users/approvens" target="_self">PENDING NOTESHEETS</a></li>
+                    <div class="sidebar-border"></div>
+                        <li><a href="/users/approvedns" target="_self">APPROVED NOTESHEETS</a></li>
+                <% } %>
+
+                <% if(Faculty.DESIGNATION == "Pro VC"|| Faculty.DESIGNATION == "VC" || Faculty.DESIGNATION == "OSD") { %>
+                        <li><a href="/users/dashboard" target="_self">DASHBOARD</a></li>
+                        <div class="sidebar-border"></div>
+                        <li><a href="/users/approvens" target="_self">PENDING NOTESHEETS</a></li>
+                        <div class="sidebar-border"></div>
+                        <li><a href="/users/approvedns" target="_self">APPROVED NOTESHEETS</a></li>
+                        
+                <% } %>
+            </ul>
+        </div>
+        <div class="main_content">
+            <div class="header"><img src="https://www.medicaps.ac.in/resources/img/logo-navbar.png" alt="Medi-Caps University">
+                <ul class="nav-ul">
+                    <div class="nav-list">
+                        <li>STAFF NAME</li><span><%= Faculty.EMPNAME %></span>
+                    </div>
+                    <div class="border"></div>
+                    <div class="nav-list">
+                        <li >STAFF ID </li><span><%= Faculty.EMPID %></span>
+                    </div>
+                    <div class="border"></div>
+                    <div class="nav-list">
+                        <li>DEPARTMENT</li><span><%= Faculty.DEPTNAME %></span>
+                    </div>
+                </ul>
+
+
+                <div class="profile profile-dropdown">
+                    <img src="/profile.svg" alt="profile">
+
+
+
+                    <ul class="nav-menu">
+                        <div class="tail"></div>
+                        <a href="/users/viewprofile" target="_self" ><li>View Profile</li></a>
+                        <a href="/users/changepassword" target="_self"><li>Change Password</li></a>
+                        <a href="/users/logout" target="_self"><li>Log out</li></a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="create_user">
+        <form action=" ">
+            <h2>PROFILE</h2>
+            <div class="box">
+				<div class="sid">
+					<label class="id">STAFF ID :: <%= Faculty.EMPID %></label>
+	            </div>
+                <div class="sname">
+                <label class="name" >STAFF NAME :: <%= Faculty.EMPNAME %></label>
+            </div>
+            <div class="dept">
+                <label class="id">DEPARTMENT :: <%= Faculty.DEPTNAME %></label>   
+           </div>
+           <div class="fac">
+                <label class="id">FACULTY :: <%= Faculty.FNAME %></label>
+            </div>
+            <div class="desi">
+                <label class="id">DESIGNATION :: <%= Faculty.DESIGNATION %></label>     
+            </div>
+            <div class="mobile">
+                <label class="id">MOBILE NO. :: <%= Faculty.MOBILENO %></label>   
+            </div>
+            <div class="email">
+                <label class="id">EMAIL :: <%= Faculty.EMAIL %></label>
+            </div>
+
+		</div>
+    </form>
+        </div>
+        
+    </div>
+</body>
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    dropdowns.forEach(dropdown => {
+
+        const label = dropdown.querySelector('label');
+        const input = dropdown.querySelector('input');
+        const menu = dropdown.querySelector('.menu');
+
+        // Function to toggle menu visibility
+        const toggleMenu = () => {
+            menu.classList.toggle('menu-open');
+        };
+
+        // Toggle menu on label click
+        label.addEventListener('click', toggleMenu);
+
+        // Toggle menu on input click
+        input.addEventListener('click', toggleMenu);
+
+        // Optional: Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target)) {
+                menu.classList.remove('menu-open');
+            }
+        });
+
+        // Handle selection from dropdown menu
+        const lists = dropdown.querySelectorAll('.menu li');
+        lists.forEach(list => {
+            list.addEventListener('click', () => {
+                menu.classList.remove('menu-open');
+                input.value = list.textContent; // Set input value on selection
+            });
+        });
+    });
+
+	const profileDropdown = document.querySelector(".profile-dropdown");
+        const profileMenu = profileDropdown.querySelector('.nav-menu');
+
+        profileDropdown.addEventListener('click', () => {
+            profileMenu.classList.toggle('menu-open');
+
+        });
+		document.addEventListener('click', (event) => {
+    const clickedOutsideMenu = !profileDropdown.contains(event.target) && !profileMenu.contains(event.target);
+    if (clickedOutsideMenu) {
+        profileMenu.classList.remove('menu-open');
+    }
+});
+});
+
+</script>
+
+</html>

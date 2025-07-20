@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notsheet Manager</title>
+    <link rel="stylesheet" href="/user/createnotesheet.css">
+    <script src="https://kit.fontawesome.com/d95664049a.js"></script>
+  <link rel="stylesheet" href="/user/valid.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="toggler">
+            <i id="icon" class="menu-btn fa-solid fa-bars"></i>
+            </div>
+        <div class="sidebar"><img src="https://portal.medicaps.ac.in/AccSoft2/Parent_Script/img/medi1.jpg" alt="Medi-Caps University">
+            <ul >
+                <% if(Faculty.DESIGNATION == "HOD"|| Faculty.DESIGNATION == "DEAN" || Faculty.DESIGNATION == "Assistant Professor"|| Faculty.DESIGNATION == "Associate Professor" || Faculty.DESIGNATION == "Professor" || Faculty.DESIGNATION == "Lecturer" || Faculty.DESIGNATION == "Lab Assistant" || Faculty.DESIGNATION == "Lab Technician") { %>
+                    <li><a href="/users/dashboard" target="_self">DASHBOARD</a></li>
+                    <div class="sidebar-border"></div>
+                    <li><a href="/users/createnotesheet" target="_self">CREATE NOTESHEET</a></li>
+                    <div class="sidebar-border"></div>
+                    <li><a href="/users/viewns" target="_self">VIEW NOTESHEET</a></li>
+                    <div class="sidebar-border"></div>
+                    <% } %>
+                
+                <% if(Faculty.DESIGNATION == "HOD"|| Faculty.DESIGNATION == "DEAN") { %>
+                    <li><a href="/users/approvens" target="_self">PENDING NOTESHEETS</a></li>
+                    <div class="sidebar-border"></div>
+                        <li><a href="/users/approvedns" target="_self">APPROVED NOTESHEETS</a></li>
+                <% } %>
+
+                <% if(Faculty.DESIGNATION == "Pro VC"|| Faculty.DESIGNATION == "VC" || Faculty.DESIGNATION == "OSD") { %>
+                        <li><a href="/users/dashboard" target="_self">DASHBOARD</a></li>
+                        <div class="sidebar-border"></div>
+                        <li><a href="/users/approvens" target="_self">PENDING NOTESHEETS</a></li>
+                        <div class="sidebar-border"></div>
+                        <li><a href="/users/approvedns" target="_self">APPROVED NOTESHEETS</a></li>
+                        
+                <% } %>
+            </ul>
+        </div>
+        <div class="main_content">
+            <div class="header"><img src="https://www.medicaps.ac.in/resources/img/logo-navbar.png" alt="Medi-Caps University">
+                <ul class="nav-ul">
+                    <div class="nav-list">
+                        <li>STAFF NAME</li><span><%= Faculty.EMPNAME %></span>
+                    </div>
+                    <div class="border"></div>
+                    <div class="nav-list">
+                        <li >STAFF ID </li><span><%= Faculty.EMPID %></span>
+                    </div>
+                    <div class="border"></div>
+                    <div class="nav-list">
+                        <li>DEPARTMENT</li><span><%= Faculty.DEPTNAME %></span>
+                    </div>
+                </ul>
+
+                    <div class="profile profile-dropdown ">
+                    <img src="/profile.svg" alt="profile">
+
+                <div class="caret select "></div>
+
+                    <ul class="nav-menu">
+                        <a href="/users/viewprofile" target="_self" ><li>View Profile</li></a>
+                        <a href="/users/changepassword" target="_self"><li>Change Password</li></a>
+                        <a href="/users/logout" target="_self"><li>Log out</li></a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="create_ns_form">
+        <form method="post" action="/users/data2">
+            <% if(success && success.length){ %>
+                <div class="msg">
+
+                    <%= success %>
+                </div>
+            <% } %>
+            <h2>CREATE NOTESHEET</h2>
+            <div class="box">
+                <div class="subject">
+                <label for="subject " >SUBJECT</label><br>
+                <textarea name="subject" id="subject" cols="135" rows="2"></textarea>
+                
+            </div>
+            <div class="details">
+                <label for="details" >DETAILS</label><br>
+                <!-- <form>
+                    <div id="editor"></div>
+                </form> -->
+                <textarea name="details" id="details" cols="135" rows="15"></textarea>
+                
+            </div>
+       
+             <div class="box2">
+
+                <label for="forward">Choose a forwarding Stream:&nbsp;&nbsp;&nbsp;
+                <select id="forward" name="forward">
+                    <option value="Normal">Forward to Default</option>
+                    <option value="DEAN">Forward to DEAN</option>
+                    <option value="ProVC">Forward to Pro VC</option>
+                    <option value="VC">Forward to VC</option>
+                    <option value="OSD">Forward to OSD</option>
+                  </select>
+                </label>
+      
+            <div class="button">
+                <button type="submit">SUBMIT</button>
+            </div>
+        </div>
+            </div>
+        </form>
+        <div class="btn">
+            <button formaction="/users/dashboard"><a href="/users/dashboard" target="_self"> EXIT </a></button>
+            </div>
+    </div>
+</body>
+<script>
+const profileDropdown = document.querySelector(".profile-dropdown");
+const sidebar = document.querySelector(".sidebar");
+const icon = document.getElementById('icon');
+        const profileMenu = profileDropdown.querySelector('.nav-menu');
+		const menu = document.querySelector('.menu-btn');
+
+        profileDropdown.addEventListener('click', () => {
+            profileMenu.classList.toggle('menu-open');
+
+        });
+		document.addEventListener('click', (event) => {
+    const clickedOutsideMenu = !profileDropdown.contains(event.target) && !profileMenu.contains(event.target);
+    if (clickedOutsideMenu) {
+        profileMenu.classList.remove('menu-open');
+    }
+});
+menu.addEventListener('click',()=>{
+	sidebar.classList.toggle('block');
+
+})
+icon.addEventListener('click',()=>{
+
+
+	if(icon.classList.contains('fa-xmark')){
+		icon.classList.remove('fa-xmark');
+	icon.classList.add('fa-bars');
+	icon.classList.toggle('rotate');
+}else{
+
+	icon.classList.toggle('rotate');
+		icon.classList.remove('fa-bars');
+		icon.classList.add('fa-xmark');
+
+	}
+
+
+})
+</script>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

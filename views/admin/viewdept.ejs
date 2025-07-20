@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+    <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notsheet Manager</title>
+    
+    <link rel="stylesheet" href="/admin/Admin_Panel.css">
+    <link rel="stylesheet" href="/admin/Create1.css">
+    <link rel="stylesheet" href="/admin/View_Dep.css">
+    <script src="https://kit.fontawesome.com/d95664049a.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+        <div class="wrapperImg">
+
+            <img  src="https://portal.medicaps.ac.in/AccSoft2/Parent_Script/img/medi1.jpg" alt="Medi-Caps University">
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li><a href="/admin/admindashboard" target="_self">DASHBOARD</a></li>
+                <div class="sidebar-border"></div>
+				<li><a href="/admin/create" target="_self">CREATE USER</a></li>
+                <div class="sidebar-border"></div>
+				<!-- <li><a href="/admin/editallns" target="_self">EDIT NOTESHEET</a></li> 
+                <div class="sidebar-border"></div> -->
+                <li><a href="/admin/viewallns" target="_self">VIEW NOTESHEET</a></li>
+                <div class="sidebar-border"></div>
+			    <li><a href="/admin/gofaculty" target="_self">CREATE FACULTY</a></li>
+                <div class="sidebar-border"></div>
+                <li><a href="/admin/viewfaculty"  target="_self">VIEW FACULTY</a></li>
+                <div class="sidebar-border"></div>
+                <li><a href="/admin/godept" target="_self">CREATE DEPARTMENT</a></li>
+                <div class="sidebar-border"></div>
+                <li><a href="/admin/viewdept" targe="_self">VIEW DEPARTMENT</a></li>
+                <div class="sidebar-border"></div>
+			</ul></div>
+		</div>
+		<div class="main_content">
+			<div class="header"><img src="https://www.medicaps.ac.in/resources/img/logo-navbar.png" alt="Medi-Caps University">
+				<ul class="nav-ul">
+					<div class="nav-list">
+						<li>ADMIN NAME :</li><span><%= Admin.EMPNAME %></span>
+					</div>
+					<div class="border"></div>
+					<div class="nav-list">
+						<li >ADMIN ID :</li><span><%= Admin.ADMINID %></span>
+					</div>
+					
+					<div class="nav-list">
+						
+					</div>
+				</ul>
+
+					<div class="profile profile-dropdown">
+					<img src="./1486485581-account-audience-person-customer-profile-user_81164.svg" alt="profile">
+
+
+
+					<ul class="nav-menu">
+                        <a href="/admin/viewprofile" target="_self" ><li>View Profile</li></a>
+                        <a href="/admin/changepassword" target="_self"><li>Change Password</li></a>
+                        <a href="/admin/logout" target="_self"><li>Log out</li></a>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+        <div class="view_dep">
+            <form action=" ">
+                <h2>VIEW DEPARTMENT</h2>
+                <div class="box">
+                    <table>
+                        <tr>
+                            <th>FACULTY ID</th>
+                            <th>DEPARTMENT ID</th>
+                            <th>DEPARTMENT NAME</th>   
+                        </tr>
+                        <tbody>
+                            <% for(let i=0; i<Department.length; i++) {  %>
+                            <tr>
+                                <td><%= Department[i].FID %></td>
+                                <td><%= Department[i].DEPTID %></td>
+                                <td><%= Department[i].DEPTNAME %></td>
+                            </tr>
+                            <% } %>
+                        </tbody>  
+                        
+                       
+                    </table>
+                    <div class="login">
+                        <button><a href="/admin/admindashboard" target="_self"> EXIT </a></button>
+                        </div>
+                    
+                    </div> 
+            </div>
+            </div>
+	</div>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+        
+            const dropdowns = document.querySelectorAll('.dropdown');
+        
+            dropdowns.forEach(dropdown => {
+        
+                const label = dropdown.querySelector('label');
+                const input = dropdown.querySelector('input');
+                const menu = dropdown.querySelector('.menu');
+        
+                // Function to toggle menu visibility
+                const toggleMenu = () => {
+                    menu.classList.toggle('menu-open');
+                };
+        
+                // Toggle menu on label click
+                label.addEventListener('click', toggleMenu);
+        
+                // Toggle menu on input click
+                input.addEventListener('click', toggleMenu);
+        
+                // Optional: Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!dropdown.contains(e.target)) {
+                        menu.classList.remove('menu-open');
+                    }
+                });
+        
+                // Handle selection from dropdown menu
+                const lists = dropdown.querySelectorAll('.menu li');
+                lists.forEach(list => {
+                    list.addEventListener('click', () => {
+                        menu.classList.remove('menu-open');
+                        input.value = list.textContent; // Set input value on selection
+                    });
+                });
+            });
+        
+            const profileDropdown = document.querySelector(".profile-dropdown");
+                const profileMenu = profileDropdown.querySelector('.nav-menu');
+        
+                profileDropdown.addEventListener('click', () => {
+                    profileMenu.classList.toggle('menu-open');
+        
+                });
+                document.addEventListener('click', (event) => {
+            const clickedOutsideMenu = !profileDropdown.contains(event.target) && !profileMenu.contains(event.target);
+            if (clickedOutsideMenu) {
+                profileMenu.classList.remove('menu-open');
+            }
+        });
+        });
+        
+        </script>
+        </html>

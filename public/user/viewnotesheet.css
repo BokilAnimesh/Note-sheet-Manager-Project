@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    background-color: #f9f9f9;  
+    font-size: 23px;
+    font-family: 'Inria Sans',sans-serif;
+}
+.department h1{
+    margin-left: 410px;
+    padding-bottom: 20px;
+}
+.regards h2{
+    margin-left: 60px;
+}
+body{
+    padding: 40px;
+}
+.wrapper{
+    border: 4px double black;
+    padding: 50px;
+}
+.sid{
+    padding-top:40px;
+    padding-left: 60px;
+}
+.sname{
+    padding-top:40px;
+    padding-left: 60px;
+}
+.descr{
+    padding-top:40px;
+    padding-left: 60px;
+}
+.dept{
+    padding-top:40px;
+    padding-left: 60px;
+}
+.des{
+    padding-top:40px;
+    padding-left: 60px;
+}
+.sub{
+    padding-top:40px;
+    padding-left: 60px;
+}
+.fac{
+    padding-top:40px;
+    padding-left: 60px;
+}
+.date{
+    padding-top:40px;
+    padding-left: 985px;
+}
+.img img{
+    width: 280px;
+    height: 75px;
+    margin-left: 35%;
+    padding-bottom: 20px;
+}
+
+.checker{
+    padding-left: 80px;
+    padding-top: 40px;
+}
+.checker .c1{
+    padding-bottom:20px;
+}
+.checker input[type="checkbox"]{
+    height:16px;
+    width:16px;
+}
+.checker #c1{
+    margin-left:30px;
+}
+.checker #c2{
+    margin-left:26px;
+}
+.checker #c3{
+    margin-left:17px;
+}
+.checker #c4{
+    margin-left:47px;
+}
+.checker #c5{
+    margin-left:34px;
+}
+.checker li{
+    font-weight: bold;
+}
+.check h3{
+padding: 10px;
+border: 2px dotted black;
+padding-left: 40%;
+font-size: 25px;
+font-weight: bold;
+}
+.fields h3{
+    padding: 10px;
+    border: 2px dotted black;
+    padding-left: 43%;
+    font-size: 25px;
+}
+/*@media only screen and (min-width: 1200px) {
+    .img img{
+        width: 350px;
+        height: 80px;
+        padding-left: 500px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .img img{
+        width: 350px;
+        height: 80px;
+        padding-left: 500px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .img img{
+        width: 350px;
+        height: 80px;
+        padding-left: 300px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+}*/
+@media print{
+    .img img{
+        width: 280px;
+        height: 75px;
+        margin-left: 25%;
+        padding-bottom: 20px;
+    }
+}
